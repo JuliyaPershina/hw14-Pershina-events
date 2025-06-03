@@ -1,0 +1,21 @@
+.ballunContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-inline: auto;
+  width: 600px;
+  height: 300px;
+  border: 2px solid green;
+  border-radius: 10px;
+  .balloonArea {
+    display: flex;
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+  }
+  .balloon {
+    font-size: 40px;
+  }
+}
