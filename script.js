@@ -34,37 +34,39 @@ function checkExplosion() {
 
 window.addEventListener('keydown', listenKey);
 
-
 // ---------- Mouse trail ------------------------------
 
 const mouseTrailContainer = document.querySelector('.mouseTrailContainer');
 const containerTop = mouseTrailContainer.getBoundingClientRect().top;
+const containerBottom =
+  mouseTrailContainer.getBoundingClientRect().top +
+  mouseTrailContainer.getBoundingClientRect().height;
 const containerLeft = mouseTrailContainer.getBoundingClientRect().left;
+const containerRight =
+  mouseTrailContainer.getBoundingClientRect().left +
+  mouseTrailContainer.getBoundingClientRect().width;
 const trails = document.querySelectorAll('.trail');
-const trailCount = trails.length
+const trailCount = trails.length;
 
-let index = 0; // Cycling through elements in order
+let index = 0;
 
 document.addEventListener('mousemove', (event) => {
   const trailElement = trails[index];
+  if (event.pageY >= containerTop && event.pageY < containerBottom) {
+    trailElement.style.top = `${event.pageY}px`;
+  } else if (event.pageY < containerTop) {
+    trailElement.style.top = containerTop;
+  } else {
+    trailElement.style.top = containerBottom;
+  }
 
-  // Move current element to mouse position
-  trailElement.style.left = `${event.pageX}px`;
-  trailElement.style.top = `${event.pageY}px`;
+  if (event.pageX >= containerLeft && event.pageX < containerRight) {
+    trailElement.style.left = `${event.pageX}px`;
+  } else if (event.pageX < containerLeft) {
+    trailElement.style.left = containerLeft;
+  } else {
+    trailElement.style.left = containerRight;
+  }
 
-  index = (index + 1) % trailCount; // Cycle through elements to maintain trail effect
+  index = (index + 1) % trailCount;
 });
-
-
-//   document.addEventListener('mousemove', (e) => {
-//   trail[0].style.left = `${e.pageX}px`;
-//   trail[0].style.top = `${e.pageY}px`;
-//   for (let i = 1; i < trail.length; i++) {
-//     const element = trail[i];
-
-//     element.style.left = trail[i - 1].style.left;
-//     element.style.top = trail[i - 1].style.top;
-//     console.log(trail[i - 1].style.left);
-//   }
-// });
-
